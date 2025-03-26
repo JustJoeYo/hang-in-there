@@ -1,7 +1,17 @@
 // query selector variables go here 👇
+// sections
 let mainPoster = document.querySelector(".main-poster");
 let posterForm = document.querySelector(".poster-form");
-let createPosterButton = document.querySelector(".show-form");
+let savedPostersSection = document.querySelector(".saved-posters");
+// buttons
+let showFormButton = document.querySelector(".show-form");
+let showSavedButton = document.querySelector(".show-saved");
+let backToMainButtons = document.querySelectorAll(".show-main, .back-to-main");
+// poster elements
+let posterImg = document.querySelector(".poster-img");
+let posterTitle = document.querySelector(".poster-title");
+let posterQuote = document.querySelector(".poster-quote");
+let showRandomButton = document.querySelector(".show-random");
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared
@@ -106,7 +116,16 @@ var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
-createPosterButton.addEventListener("click", test);
+showFormButton.addEventListener("click", () => showSection(posterForm));
+showSavedButton.addEventListener("click", () =>
+  showSection(savedPostersSection)
+);
+backToMainButtons.forEach((button) => {
+  button.addEventListener("click", () => showSection(mainPoster));
+});
+// show random poster on load
+window.addEventListener("load", displayRandomPoster);
+showRandomButton.addEventListener("click", displayRandomPoster);
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -123,7 +142,25 @@ function createPoster(imageURL, title, quote) {
   };
 }
 
-function test() {
+function displayRandomPoster() {
+  const randomImage = images[getRandomIndex(images)];
+  const randomTitle = titles[getRandomIndex(titles)];
+  const randomQuote = quotes[getRandomIndex(quotes)];
+
+  posterImg.src = randomImage;
+  posterTitle.innerText = randomTitle;
+  posterQuote.innerText = randomQuote;
+
+  // Save the current poster as an object
+  currentPoster = createPoster(randomImage, randomTitle, randomQuote);
+}
+
+function showSection(sectionToShow) {
+  // Hide all sections first
   mainPoster.classList.add("hidden");
-  posterForm.classList.remove("hidden");
+  posterForm.classList.add("hidden");
+  savedPostersSection.classList.add("hidden");
+
+  // Show only the requested section
+  sectionToShow.classList.remove("hidden");
 }
