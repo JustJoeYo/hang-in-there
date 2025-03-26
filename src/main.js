@@ -208,7 +208,18 @@ function saveCurrentPoster() {
   }
 }
 
-function displaySavedPosters() {}
+function displaySavedPosters() {
+  savedPostersGrid.innerHTML = ""; // Clear current content of the grid to avoid duplication
+
+  // make a small poster for the grid view of saved posters
+  savedPosters.forEach((poster) => {
+    const miniPoster = document.createElement("div");
+    miniPoster.classList.add("mini-poster");
+    miniPoster.innerHTML = `
+      
+    `;
+  });
+}
 
 function showSection(sectionToShow) {
   // Hide all sections first
