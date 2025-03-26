@@ -297,8 +297,21 @@ function createPoster(imageURL, title, quote) {
   };
 }
 
+// function to create a mini poster
+function createMiniPoster(poster) {
+  const miniPoster = document.createElement("div");
+  miniPoster.classList.add("mini-poster");
+  miniPoster.innerHTML = `
+    <img src="${poster.imageURL}" alt="${poster.title}">
+    <h2>${poster.title}</h2>
+    <h4>${poster.quote}</h4>
+  `;
+  return miniPoster;
+}
+
 // added function to adhere to DRY principle
-function displayPoster(image, title, quote) {
+function displayPoster({ image, title, quote }) {
+  // made an object param for cleaner code
   posterImage.src = image;
   posterTitle.innerText = title;
   posterQuote.innerText = quote;
@@ -307,33 +320,35 @@ function displayPoster(image, title, quote) {
 }
 
 function displayRandomPoster() {
-  const randomImage = images[getRandomIndex(images)];
-  const randomTitle = titles[getRandomIndex(titles)];
-  const randomQuote = quotes[getRandomIndex(quotes)];
+  displayPoster({
+    image: images[getRandomIndex(images)],
+    title: titles[getRandomIndex(titles)],
+    quote: quotes[getRandomIndex(quotes)],
+  });
+}
 
-  displayPoster(randomImage, randomTitle, randomQuote);
+function displayPosterCollections(posters, container) {
+  container.innerHTML = "";
+
+  posters.forEach((poster) => {
+    const miniPoster = createMiniPoster(poster);
+    container.appendChild(miniPoster);
+  });
+}
+
+function displaySavedPosters() {
+  displayPosterCollections(savedPosters, savedPostersGrid);
 }
 
 function displayUnmotivationalPosters() {
-  unmotivationalPostersGrid.innerHTML = ""; // Clear previous content
-
-  // Check if cleanedUnmotivationalPosters is empty and call cleanData if it is
+  // If the cleanedUnmotivationalPosters array is empty, we need to clean the data
   if (cleanedUnmotivationalPosters.length === 0) {
     cleanData();
   }
-
-  // Create and display mini posters using the cleaned data
-  cleanedUnmotivationalPosters.forEach((poster) => {
-    const miniPoster = document.createElement("div");
-    miniPoster.classList.add("mini-poster");
-    miniPoster.innerHTML = `
-      <img src="${poster.imageURL}" alt="${poster.title}">
-      <h2>${poster.title}</h2>
-      <h4>${poster.quote}</h4>
-    `;
-
-    unmotivationalPostersGrid.appendChild(miniPoster);
-  });
+  displayPosterCollections(
+    cleanedUnmotivationalPosters,
+    unmotivationalPostersGrid
+  );
 }
 
 function clearForm() {
@@ -356,12 +371,21 @@ function cleanData() {
   return cleanedUnmotivationalPosters;
 }
 
+function validatePosterForm(imageURL, title, quote) {
+  return imageURL && title && quote;
+}
+
 function makePoster(event) {
   event.preventDefault();
 
-  const imageURL = posterImageInput.value;
-  const title = posterTitleInput.value;
-  const quote = posterQuoteInput.value;
+  const imageURL = posterImageInput.value.trim(); // trim() removes whitespace (note)
+  const title = posterTitleInput.value.trim();
+  const quote = posterQuoteInput.value.trim();
+
+  if (!validatePosterForm(imageURL, title, quote)) {
+    alert("Please fill in all fields");
+    return;
+  }
 
   images.push(imageURL);
   titles.push(title);
@@ -412,23 +436,6 @@ function deleteUnmotivationalPoster(event) {
     // Update the DOM using the existing function
     displayUnmotivationalPosters();
   }
-}
-
-function displaySavedPosters() {
-  savedPostersGrid.innerHTML = ""; // Clear current content of the grid to avoid duplication
-
-  // make a small poster for the grid view of saved posters
-  savedPosters.forEach((poster) => {
-    const miniPoster = document.createElement("div");
-    miniPoster.classList.add("mini-poster");
-    miniPoster.innerHTML = `
-      <img src="${poster.imageURL}" alt="saved poster">
-      <h2>${poster.title}</h2>
-      <h4>${poster.quote}</h4>
-    `;
-
-    savedPostersGrid.appendChild(miniPoster); // Adds poster to the grid *moves it from its current position to the new position using append*
-  });
 }
 
 function showSection(sectionToShow) {
