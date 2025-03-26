@@ -198,9 +198,17 @@ function saveCurrentPoster() {
       poster.id === currentPoster.id ||
       (poster.imageURL === currentPoster.imageURL &&
         poster.title === currentPoster.title &&
-        poster.quote === currentPoster.quote)
+        poster.quote === currentPoster.quote) // annoying but necessary
   );
+
+  if (!posterExists) {
+    // if the poster doesn't exist in the savedPosters array shove it in.
+    savedPosters.push(currentPoster);
+    displaySavedPosters(); // Update the display whenever we save a new poster
+  }
 }
+
+function displaySavedPosters() {}
 
 function showSection(sectionToShow) {
   // Hide all sections first
