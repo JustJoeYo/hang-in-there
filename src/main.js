@@ -253,6 +253,8 @@ let unmotivationalPosters = [
     img_url: "./assets/doubt.jpg",
   },
 ];
+// allows for the unmotivational posters to be displayed in the same format as the regular posters
+let cleanedUnmotivationalPosters = [];
 
 // event listeners go here 👇
 showFormButton.addEventListener("click", () => showSection(posterForm));
@@ -274,6 +276,11 @@ showUnmotivationalButton.addEventListener("click", () => {
 makePosterButton.addEventListener("click", makePoster);
 // save poster
 savePosterButton.addEventListener("click", saveCurrentPoster);
+// delete poster
+unmotivationalPostersGrid.addEventListener(
+  "dblclick",
+  deleteUnmotivationalPoster
+);
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -310,8 +317,10 @@ function displayRandomPoster() {
 function displayUnmotivationalPosters() {
   unmotivationalPostersGrid.innerHTML = ""; // Clear previous content
 
-  // Get reformatted data
-  const cleanedUnmotivationalPosters = cleanData();
+  // Check if cleanedUnmotivationalPosters is empty and call cleanData if it is
+  if (cleanedUnmotivationalPosters.length === 0) {
+    cleanData();
+  }
 
   // Create and display mini posters using the cleaned data
   cleanedUnmotivationalPosters.forEach((poster) => {
@@ -328,7 +337,7 @@ function displayUnmotivationalPosters() {
 }
 
 function clearForm() {
-  // pre-firing the function to clear the form to match DRY
+  // Pre-firing the function to clear the form to match DRY
   posterImageInput.value = "";
   posterTitleInput.value = "";
   posterQuoteInput.value = "";
@@ -336,16 +345,15 @@ function clearForm() {
 
 // function just formats the unmotivational posters data to match the poster data model
 function cleanData() {
-  // Create a new array with poster objects
-  const cleanedPosters = unmotivationalPosters.map((poster) => {
-    return createPoster(
-      poster.img_url, // imageURL
-      poster.name, // title
-      poster.description // quote
-    );
-  });
+  // Only clean the data if we haven't done so already
+  if (cleanedUnmotivationalPosters.length === 0) {
+    // Creates a new array of objects that match the poster data model (makes mini posters)
+    cleanedUnmotivationalPosters = unmotivationalPosters.map((poster) => {
+      return createPoster(poster.img_url, poster.name, poster.description);
+    });
+  }
 
-  return cleanedPosters;
+  return cleanedUnmotivationalPosters;
 }
 
 function makePoster(event) {
@@ -383,6 +391,27 @@ function isPosterSaved(poster) {
         savedPoster.title === poster.title &&
         savedPoster.quote === poster.quote)
   );
+}
+
+function deleteUnmotivationalPoster(event) {
+  // Using closest to find the mini-poster element (in the hint hint)
+  const posterElement = event.target.closest(".mini-poster");
+
+  if (posterElement) {
+    // Grab the title and quote from the mini-poster
+    const posterTitle = posterElement.querySelector("h2").innerText;
+    const posterQuote = posterElement.querySelector("h4").innerText;
+
+    // Filter out the deleted poster
+    cleanedUnmotivationalPosters = cleanedUnmotivationalPosters.filter(
+      (poster) => {
+        return !(poster.title === posterTitle && poster.quote === posterQuote);
+      }
+    );
+
+    // Update the DOM using the existing function
+    displayUnmotivationalPosters();
+  }
 }
 
 function displaySavedPosters() {
