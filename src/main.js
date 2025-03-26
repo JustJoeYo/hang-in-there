@@ -162,11 +162,16 @@ function displayRandomPoster() {
 }
 
 function makePoster(event) {
-  event.preventDefault();
+  event.preventDefault(); // prevent refresh
 
   const imageURL = posterImageInput.value;
   const title = posterTitleInput.value;
   const quote = posterQuoteInput.value;
+
+  // Just shoves them into the arrays
+  images.push(imageURL);
+  titles.push(title);
+  quotes.push(quote);
 
   posterImage.src = imageURL;
   posterTitle.innerText = title;
@@ -175,6 +180,10 @@ function makePoster(event) {
   currentPoster = createPoster(imageURL, title, quote);
 
   showSection(mainPoster); // Show the main poster section
+
+  // posterImageInput.value = ''; // commented out for now but will reset the input fields
+  // posterTitleInput.value = '';
+  // posterQuoteInput.value = '';
 }
 
 function showSection(sectionToShow) {
