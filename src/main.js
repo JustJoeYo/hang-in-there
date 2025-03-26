@@ -154,37 +154,36 @@ function createPoster(imageURL, title, quote) {
   };
 }
 
+// added function to adhere to DRY principle
+function displayPoster(image, title, quote) {
+  posterImage.src = image;
+  posterTitle.innerText = title;
+  posterQuote.innerText = quote;
+
+  currentPoster = createPoster(image, title, quote);
+}
+
 function displayRandomPoster() {
   const randomImage = images[getRandomIndex(images)];
   const randomTitle = titles[getRandomIndex(titles)];
   const randomQuote = quotes[getRandomIndex(quotes)];
 
-  posterImage.src = randomImage;
-  posterTitle.innerText = randomTitle;
-  posterQuote.innerText = randomQuote;
-
-  currentPoster = createPoster(randomImage, randomTitle, randomQuote);
+  displayPoster(randomImage, randomTitle, randomQuote);
 }
 
 function makePoster(event) {
-  event.preventDefault(); // prevent refresh
+  event.preventDefault();
 
   const imageURL = posterImageInput.value;
   const title = posterTitleInput.value;
   const quote = posterQuoteInput.value;
 
-  // Just shoves them into the arrays
   images.push(imageURL);
   titles.push(title);
   quotes.push(quote);
 
-  posterImage.src = imageURL;
-  posterTitle.innerText = title;
-  posterQuote.innerText = quote;
-
-  currentPoster = createPoster(imageURL, title, quote);
-
-  showSection(mainPoster); // Show the main poster section
+  displayPoster(imageURL, title, quote);
+  showSection(mainPoster);
 
   // posterImageInput.value = ''; // commented out for now but will reset the input fields
   // posterTitleInput.value = '';
