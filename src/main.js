@@ -136,6 +136,8 @@ window.addEventListener("load", displayRandomPoster);
 showRandomButton.addEventListener("click", displayRandomPoster);
 // make poster
 makePosterButton.addEventListener("click", makePoster);
+// save poster
+savePosterButton.addEventListener("click", saveCurrentPoster);
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -187,6 +189,17 @@ function makePoster(event) {
   // posterImageInput.value = ''; // commented out for now but will reset the input fields
   // posterTitleInput.value = '';
   // posterQuoteInput.value = '';
+}
+
+function saveCurrentPoster() {
+  const posterExists = savedPosters.some(
+    // prevents duplicates
+    (poster) =>
+      poster.id === currentPoster.id ||
+      (poster.imageURL === currentPoster.imageURL &&
+        poster.title === currentPoster.title &&
+        poster.quote === currentPoster.quote)
+  );
 }
 
 function showSection(sectionToShow) {
