@@ -20,6 +20,14 @@ let posterQuoteInput = document.querySelector("#poster-quote");
 // saved posters
 let savePosterButton = document.querySelector(".save-poster");
 let savedPostersGrid = document.querySelector(".saved-posters-grid");
+// unmotivational posters
+let unmotivationalPostersSection = document.querySelector(
+  ".unmotivational-posters"
+);
+let unmotivationalPostersGrid = document.querySelector(
+  ".unmotivational-posters-grid"
+);
+let showUnmotivationalButton = document.querySelector(".show-unmotivational");
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared
@@ -257,6 +265,11 @@ backToMainButtons.forEach((button) => {
 // show random poster on load
 window.addEventListener("load", displayRandomPoster);
 showRandomButton.addEventListener("click", displayRandomPoster);
+// show unmotivational posters
+showUnmotivationalButton.addEventListener("click", () => {
+  showSection(unmotivationalPostersSection);
+  displayUnmotivationalPosters();
+});
 // make poster
 makePosterButton.addEventListener("click", makePoster);
 // save poster
@@ -292,6 +305,23 @@ function displayRandomPoster() {
   const randomQuote = quotes[getRandomIndex(quotes)];
 
   displayPoster(randomImage, randomTitle, randomQuote);
+}
+
+function displayUnmotivationalPosters() {
+  unmotivationalPostersGrid.innerHTML = ""; // Clear previous content
+
+  unmotivationalPosters.forEach((poster) => {
+    // create and display mini posters
+    const miniPoster = document.createElement("div");
+    miniPoster.classList.add("mini-poster");
+    miniPoster.innerHTML = `
+      <img src="${poster.img_url}" alt="${poster.name}">
+      <h2>${poster.name}</h2>
+      <h4>${poster.description}</h4>
+    `;
+
+    unmotivationalPostersGrid.appendChild(miniPoster); // Once again using appendChild to link it with its partent element
+  });
 }
 
 function clearForm() {
@@ -360,6 +390,7 @@ function showSection(sectionToShow) {
   mainPoster.classList.add("hidden");
   posterForm.classList.add("hidden");
   savedPostersSection.classList.add("hidden");
+  unmotivationalPostersSection.classList.add("hidden");
 
   // Show only the requested section
   sectionToShow.classList.remove("hidden");
