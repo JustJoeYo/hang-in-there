@@ -171,6 +171,13 @@ function displayRandomPoster() {
   displayPoster(randomImage, randomTitle, randomQuote);
 }
 
+function clearForm() {
+  // pre-firing the function to clear the form to match DRY
+  posterImageInput.value = "";
+  posterTitleInput.value = "";
+  posterQuoteInput.value = "";
+}
+
 function makePoster(event) {
   event.preventDefault();
 
@@ -185,9 +192,7 @@ function makePoster(event) {
   displayPoster(imageURL, title, quote);
   showSection(mainPoster);
 
-  // posterImageInput.value = ''; // commented out for now but will reset the input fields
-  // posterTitleInput.value = '';
-  // posterQuoteInput.value = '';
+  clearForm(); // clear the form after making a poster
 }
 
 function saveCurrentPoster() {
