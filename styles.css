@@ -23,6 +23,7 @@ button {
   border: none;
   border-radius: 10px;
   color: white;
+  margin: 10px;
 }
 
 button:hover {
@@ -30,7 +31,7 @@ button:hover {
 }
 
 .hidden {
-  display: none!important;
+  display: none !important;
 }
 
 /* ~~~~~ MAIN POSTER SECTION ~~~~~ */
@@ -67,10 +68,6 @@ button:hover {
   letter-spacing: 20px;
   margin-bottom: 10px;
   text-transform: uppercase;
-}
-
-.main-poster button {
-  margin: 10px;
 }
 
 /* ~~~~~ POSTER FORM SECTION ~~~~~ */
@@ -125,7 +122,7 @@ button:hover {
 }
 
 .mini-poster img {
-  height:200px;
+  height: 200px;
   width: 300px;
 }
 
@@ -143,4 +140,36 @@ button:hover {
   letter-spacing: 5px;
   margin-bottom: 10px;
   text-transform: uppercase;
+}
+
+/* ~~~~~ UNMOTIVATIONAL POSTER SECTION ~~~~~ */
+.unmotivational-posters {
+  padding: 40px;
+}
+
+.unmotivational-posters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.unmotivational-posters .mini-poster {
+  background: #525050;
+  height: 320px;
+  padding: 20px;
+  width: 400px;
+  margin: 10px;
+  border-radius: 10px;
+}
+.unmotivational-posters .mini-poster h2 {
+  padding-top: 20px;
+  color: black;
+}
+
+.unmotivational-posters .mini-poster img {
+  height: 180px;
+  width: 280px;
+  border: 1px solid #444;
 }
