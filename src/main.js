@@ -17,6 +17,9 @@ let showRandomButton = document.querySelector(".show-random");
 let posterImageInput = document.querySelector("#poster-image-url");
 let posterTitleInput = document.querySelector("#poster-title");
 let posterQuoteInput = document.querySelector("#poster-quote");
+// saved posters
+let savePosterButton = document.querySelector(".save-poster");
+let savedPostersGrid = document.querySelector(".saved-posters-grid");
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared
