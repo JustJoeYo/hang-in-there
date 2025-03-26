@@ -310,17 +310,20 @@ function displayRandomPoster() {
 function displayUnmotivationalPosters() {
   unmotivationalPostersGrid.innerHTML = ""; // Clear previous content
 
-  unmotivationalPosters.forEach((poster) => {
-    // create and display mini posters
+  // Get reformatted data
+  const cleanedUnmotivationalPosters = reformatData();
+
+  // Create and display mini posters using the cleaned data
+  cleanedUnmotivationalPosters.forEach((poster) => {
     const miniPoster = document.createElement("div");
     miniPoster.classList.add("mini-poster");
     miniPoster.innerHTML = `
-      <img src="${poster.img_url}" alt="${poster.name}">
-      <h2>${poster.name}</h2>
-      <h4>${poster.description}</h4>
+      <img src="${poster.imageURL}" alt="${poster.title}">
+      <h2>${poster.title}</h2>
+      <h4>${poster.quote}</h4>
     `;
 
-    unmotivationalPostersGrid.appendChild(miniPoster); // Once again using appendChild to link it with its partent element
+    unmotivationalPostersGrid.appendChild(miniPoster);
   });
 }
 
@@ -329,6 +332,20 @@ function clearForm() {
   posterImageInput.value = "";
   posterTitleInput.value = "";
   posterQuoteInput.value = "";
+}
+
+// function just formats the unmotivational posters data to match the poster data model
+function reformatData() {
+  // Create a new array with poster objects
+  const cleanedPosters = unmotivationalPosters.map((poster) => {
+    return createPoster(
+      poster.img_url, // imageURL
+      poster.name, // title
+      poster.description // quote
+    );
+  });
+
+  return cleanedPosters;
 }
 
 function makePoster(event) {
