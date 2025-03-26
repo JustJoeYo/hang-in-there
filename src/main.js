@@ -311,7 +311,6 @@ function createMiniPoster(poster) {
 
 // added function to adhere to DRY principle
 function displayPoster({ image, title, quote }) {
-  // made an object param for cleaner code
   posterImage.src = image;
   posterTitle.innerText = title;
   posterQuote.innerText = quote;
@@ -352,7 +351,6 @@ function displayUnmotivationalPosters() {
 }
 
 function clearForm() {
-  // Pre-firing the function to clear the form to match DRY
   posterImageInput.value = "";
   posterTitleInput.value = "";
   posterQuoteInput.value = "";
@@ -378,7 +376,7 @@ function validatePosterForm(imageURL, title, quote) {
 function makePoster(event) {
   event.preventDefault();
 
-  const imageURL = posterImageInput.value.trim(); // trim() removes whitespace (note)
+  const imageURL = posterImageInput.value.trim();
   const title = posterTitleInput.value.trim();
   const quote = posterQuoteInput.value.trim();
 
@@ -394,14 +392,13 @@ function makePoster(event) {
   displayPoster(imageURL, title, quote);
   showSection(mainPoster);
 
-  clearForm(); // clear the form after making a poster
+  clearForm();
 }
 
 function saveCurrentPoster() {
   // Data model logic separated from the DOM logic (rubric)
   if (!isPosterSaved(currentPoster)) {
     savedPosters.push(currentPoster);
-    // DOM update after data model changes
     displaySavedPosters();
   }
 }
@@ -433,18 +430,15 @@ function deleteUnmotivationalPoster(event) {
       }
     );
 
-    // Update the DOM using the existing function
     displayUnmotivationalPosters();
   }
 }
 
 function showSection(sectionToShow) {
-  // Hide all sections first
   mainPoster.classList.add("hidden");
   posterForm.classList.add("hidden");
   savedPostersSection.classList.add("hidden");
   unmotivationalPostersSection.classList.add("hidden");
 
-  // Show only the requested section
   sectionToShow.classList.remove("hidden");
 }
