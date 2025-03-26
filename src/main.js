@@ -191,20 +191,23 @@ function makePoster(event) {
 }
 
 function saveCurrentPoster() {
-  const posterExists = savedPosters.some(
-    // prevents duplicates
-    (poster) =>
-      poster.id === currentPoster.id ||
-      (poster.imageURL === currentPoster.imageURL &&
-        poster.title === currentPoster.title &&
-        poster.quote === currentPoster.quote) // annoying but necessary
-  );
-
-  if (!posterExists) {
-    // if the poster doesn't exist in the savedPosters array shove it in.
+  // Data model logic separated from the DOM logic (rubric)
+  if (!isPosterSaved(currentPoster)) {
     savedPosters.push(currentPoster);
-    displaySavedPosters(); // Update the display whenever we save a new poster
+    // DOM update after data model changes
+    displaySavedPosters();
   }
+}
+
+function isPosterSaved(poster) {
+  return savedPosters.some(
+    // checks if the poster is already saved and returns truthly/falsely value for saveCurrentPoster
+    (savedPoster) =>
+      savedPoster.id === poster.id ||
+      (savedPoster.imageURL === poster.imageURL &&
+        savedPoster.title === poster.title &&
+        savedPoster.quote === poster.quote)
+  );
 }
 
 function displaySavedPosters() {
