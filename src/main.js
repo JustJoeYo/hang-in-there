@@ -1,7 +1,10 @@
 // query selector variables go here 👇
+let mainPoster = document.querySelector(".main-poster");
+let posterForm = document.querySelector(".poster-form");
+let createPosterButton = document.querySelector(".show-form");
 
 // we've provided you with some data to work with 👇
-// tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
+// tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared
 var images = [
   "./assets/bees.jpg",
   "./assets/bridge.jpg",
@@ -20,7 +23,7 @@ var images = [
   "./assets/runner.jpg",
   "./assets/squirrel.jpg",
   "./assets/tiger.jpg",
-  "./assets/turtle.jpg"
+  "./assets/turtle.jpg",
 ];
 var titles = [
   "determination",
@@ -57,7 +60,7 @@ var titles = [
   "smile",
   "trust",
   "understanding",
-  "wisdom"
+  "wisdom",
 ];
 var quotes = [
   "Don’t downgrade your dream just to fit your reality, upgrade your conviction to match your destiny.",
@@ -97,12 +100,13 @@ var quotes = [
   "If you have good thoughts they will shine out of your face like sunbeams and you will always look lovely.",
   "No matter what people tell you, words and ideas can change the world.",
   "Each person must live their life as a model for others.",
-  "A champion is defined not by their wins but by how they can recover when they fall."
+  "A champion is defined not by their wins but by how they can recover when they fall.",
 ];
 var savedPosters = [];
 var currentPoster;
 
 // event listeners go here 👇
+createPosterButton.addEventListener("click", test);
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -112,8 +116,14 @@ function getRandomIndex(array) {
 
 function createPoster(imageURL, title, quote) {
   return {
-    id: Date.now(), 
-    imageURL: imageURL, 
-    title: title, 
-    quote: quote}
+    id: Date.now(),
+    imageURL: imageURL,
+    title: title,
+    quote: quote,
+  };
+}
+
+function test() {
+  mainPoster.classList.add("hidden");
+  posterForm.classList.remove("hidden");
 }
