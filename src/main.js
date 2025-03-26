@@ -216,8 +216,12 @@ function displaySavedPosters() {
     const miniPoster = document.createElement("div");
     miniPoster.classList.add("mini-poster");
     miniPoster.innerHTML = `
-      
+      <img src="${poster.imageURL}" alt="saved poster">
+      <h2>${poster.title}</h2>
+      <h4>${poster.quote}</h4>
     `;
+
+    savedPostersGrid.appendChild(miniPoster); // Adds poster to the grid *moves it from its current position to the new position using append*
   });
 }
 
