@@ -311,7 +311,7 @@ function displayUnmotivationalPosters() {
   unmotivationalPostersGrid.innerHTML = ""; // Clear previous content
 
   // Get reformatted data
-  const cleanedUnmotivationalPosters = reformatData();
+  const cleanedUnmotivationalPosters = cleanData();
 
   // Create and display mini posters using the cleaned data
   cleanedUnmotivationalPosters.forEach((poster) => {
@@ -335,7 +335,7 @@ function clearForm() {
 }
 
 // function just formats the unmotivational posters data to match the poster data model
-function reformatData() {
+function cleanData() {
   // Create a new array with poster objects
   const cleanedPosters = unmotivationalPosters.map((poster) => {
     return createPoster(
