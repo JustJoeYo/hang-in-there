@@ -7,11 +7,16 @@ let savedPostersSection = document.querySelector(".saved-posters");
 let showFormButton = document.querySelector(".show-form");
 let showSavedButton = document.querySelector(".show-saved");
 let backToMainButtons = document.querySelectorAll(".show-main, .back-to-main");
+let makePosterButton = document.querySelector(".make-poster");
 // poster elements
-let posterImg = document.querySelector(".poster-img");
+let posterImage = document.querySelector(".poster-img");
 let posterTitle = document.querySelector(".poster-title");
 let posterQuote = document.querySelector(".poster-quote");
 let showRandomButton = document.querySelector(".show-random");
+// create poster elements
+let posterImageInput = document.querySelector("#poster-image-url");
+let posterTitleInput = document.querySelector("#poster-title");
+let posterQuoteInput = document.querySelector("#poster-quote");
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared
@@ -126,6 +131,8 @@ backToMainButtons.forEach((button) => {
 // show random poster on load
 window.addEventListener("load", displayRandomPoster);
 showRandomButton.addEventListener("click", displayRandomPoster);
+// make poster
+makePosterButton.addEventListener("click", makePoster);
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -147,12 +154,27 @@ function displayRandomPoster() {
   const randomTitle = titles[getRandomIndex(titles)];
   const randomQuote = quotes[getRandomIndex(quotes)];
 
-  posterImg.src = randomImage;
+  posterImage.src = randomImage;
   posterTitle.innerText = randomTitle;
   posterQuote.innerText = randomQuote;
 
-  // Save the current poster as an object
   currentPoster = createPoster(randomImage, randomTitle, randomQuote);
+}
+
+function makePoster(event) {
+  event.preventDefault();
+
+  const imageURL = posterImageInput.value;
+  const title = posterTitleInput.value;
+  const quote = posterQuoteInput.value;
+
+  posterImage.src = imageURL;
+  posterTitle.innerText = title;
+  posterQuote.innerText = quote;
+
+  currentPoster = createPoster(imageURL, title, quote);
+
+  showSection(mainPoster); // Show the main poster section
 }
 
 function showSection(sectionToShow) {
