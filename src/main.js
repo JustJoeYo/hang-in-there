@@ -309,6 +309,48 @@ function createMiniPoster(poster) {
   return miniPoster;
 }
 
+function makePoster(event) {
+  event.preventDefault();
+
+  const imageURL = posterImageInput.value.trim();
+  const title = posterTitleInput.value.trim();
+  const quote = posterQuoteInput.value.trim();
+
+  if (!validatePosterForm(imageURL, title, quote)) {
+    alert("Please fill in all fields");
+    return;
+  }
+
+  images.push(imageURL);
+  titles.push(title);
+  quotes.push(quote);
+
+  displayPoster(imageURL, title, quote);
+  showSection(mainPoster);
+
+  clearForm();
+}
+
+function saveCurrentPoster() {
+  // Data model logic separated from the DOM logic (rubric)
+  if (!validateSavedPoster(currentPoster)) {
+    savedPosters.push(currentPoster);
+    displaySavedPosters();
+  }
+}
+
+// question for checkin, is this an ideal name for this function?
+function validateSavedPoster(poster) {
+  return savedPosters.some(
+    // checks if the poster is already saved and returns truthly/falsely value for saveCurrentPoster
+    (savedPoster) =>
+      savedPoster.id === poster.id ||
+      (savedPoster.imageURL === poster.imageURL &&
+        savedPoster.title === poster.title &&
+        savedPoster.quote === poster.quote)
+  );
+}
+
 // added function to adhere to DRY principle
 function displayPoster({ image, title, quote }) {
   posterImage.src = image;
@@ -350,6 +392,26 @@ function displayUnmotivationalPosters() {
   );
 }
 
+function deleteUnmotivationalPoster(event) {
+  // Using closest to find the mini-poster element (in the hint hint)
+  const posterElement = event.target.closest(".mini-poster");
+
+  if (posterElement) {
+    // Grab the title and quote from the mini-poster
+    const posterTitle = posterElement.querySelector("h2").innerText;
+    const posterQuote = posterElement.querySelector("h4").innerText;
+
+    // Filter out the deleted poster
+    cleanedUnmotivationalPosters = cleanedUnmotivationalPosters.filter(
+      (poster) => {
+        return !(poster.title === posterTitle && poster.quote === posterQuote);
+      }
+    );
+
+    displayUnmotivationalPosters();
+  }
+}
+
 function clearForm() {
   posterImageInput.value = "";
   posterTitleInput.value = "";
@@ -371,67 +433,6 @@ function cleanData() {
 
 function validatePosterForm(imageURL, title, quote) {
   return imageURL && title && quote;
-}
-
-function makePoster(event) {
-  event.preventDefault();
-
-  const imageURL = posterImageInput.value.trim();
-  const title = posterTitleInput.value.trim();
-  const quote = posterQuoteInput.value.trim();
-
-  if (!validatePosterForm(imageURL, title, quote)) {
-    alert("Please fill in all fields");
-    return;
-  }
-
-  images.push(imageURL);
-  titles.push(title);
-  quotes.push(quote);
-
-  displayPoster(imageURL, title, quote);
-  showSection(mainPoster);
-
-  clearForm();
-}
-
-function saveCurrentPoster() {
-  // Data model logic separated from the DOM logic (rubric)
-  if (!isPosterSaved(currentPoster)) {
-    savedPosters.push(currentPoster);
-    displaySavedPosters();
-  }
-}
-
-function isPosterSaved(poster) {
-  return savedPosters.some(
-    // checks if the poster is already saved and returns truthly/falsely value for saveCurrentPoster
-    (savedPoster) =>
-      savedPoster.id === poster.id ||
-      (savedPoster.imageURL === poster.imageURL &&
-        savedPoster.title === poster.title &&
-        savedPoster.quote === poster.quote)
-  );
-}
-
-function deleteUnmotivationalPoster(event) {
-  // Using closest to find the mini-poster element (in the hint hint)
-  const posterElement = event.target.closest(".mini-poster");
-
-  if (posterElement) {
-    // Grab the title and quote from the mini-poster
-    const posterTitle = posterElement.querySelector("h2").innerText;
-    const posterQuote = posterElement.querySelector("h4").innerText;
-
-    // Filter out the deleted poster
-    cleanedUnmotivationalPosters = cleanedUnmotivationalPosters.filter(
-      (poster) => {
-        return !(poster.title === posterTitle && poster.quote === posterQuote);
-      }
-    );
-
-    displayUnmotivationalPosters();
-  }
 }
 
 function showSection(sectionToShow) {
