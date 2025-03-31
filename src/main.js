@@ -339,10 +339,9 @@ function saveCurrentPoster() {
   }
 }
 
-// question for checkin, is this an ideal name for this function?
 function validateSavedPoster(poster) {
+  // some works better than include due to some's abilities with complex comparisons and it also doesnt have to iterate over the entire array.
   return savedPosters.some(
-    // checks if the poster is already saved and returns truthly/falsely value for saveCurrentPoster
     (savedPoster) =>
       savedPoster.id === poster.id ||
       (savedPoster.imageURL === poster.imageURL &&
