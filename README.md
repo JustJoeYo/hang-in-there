@@ -19,22 +19,39 @@ Clone down this repository to your local machine:
 
 ### Preview of App:
 
-
+<img width="1398" alt="Screenshot 2025-04-02 at 8 33 01 AM" src="https://github.com/user-attachments/assets/3e919e69-9b50-49d2-8428-e2ee321f9777" />
 
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off. gifs preferred!)
 
 ### Context:
 
+
+
 [//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
 
 ### Contributors:
+
+<a href="https://github.com/JustJoeYo">
+  <img src="https://avatars.githubusercontent.com/u/53631725?v=4" alt="contrib.rocks image" width="128" height="128" />
+</a>
+
+Joe's [![Joe's LinkedIn][linkedin-shield]][linkedin-url]
 
 [//]: <> (Who worked on this application? Link to your GitHub. Consider also providing LinkedIn link)
 
 ### Learning Goals:
 
+
+
 [//]: <> (What were the learning goals of this project? What tech did you work with?)
 
 ### Wins + Challenges:
 
+
+
 [//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
+
+[contributors-shield]: https://img.shields.io/github/contributors/JustJoeYo/futbol.svg?style=for-the-badge
+[contributors-url]: https://github.com/JustJoeYo/futbol/graphs/contributors
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/joseph-samere-981a5b291/
