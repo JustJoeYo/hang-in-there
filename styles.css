@@ -27,8 +27,11 @@ button {
   transition: transform 0.1s, background 0.2s;
 }
 
-button:hover {
-  background: darkslateblue;
+.show-main {
+  width: fit-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hidden {
@@ -158,12 +161,12 @@ button:hover {
 }
 
 .unmotivational-posters .mini-poster {
-  background: #525050;
+  background: #767373;
   height: 320px;
   padding: 20px;
   width: 400px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .unmotivational-posters .mini-poster h2 {
   padding-top: 20px;
@@ -181,6 +184,10 @@ button:hover {
 .mini-poster:hover {
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+}
+
+button:hover {
+  background: darkslateblue;
 }
 
 button:active {
