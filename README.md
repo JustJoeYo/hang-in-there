@@ -25,7 +25,7 @@ Clone down this repository to your local machine:
 
 ### Context:
 
-
+This is project 1 in turing Module 2, we had about 10 or so days to create a project matching a comp, add javascript functionality to all buttons/events/functions, and create new HTML for unmotivational posters based on the comp. 
 
 [//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
 
@@ -41,13 +41,25 @@ Joe's [![Joe's LinkedIn][linkedin-shield]][linkedin-url]
 
 ### Learning Goals:
 
-
+* Practice reading, understanding, and using existing code
+* Write clean, DRY JavaScript
+    - Build out functionality using functions that show trends toward SRP
+    - Manipulate the page after it has loaded by adding, removing, and updating elements on the DOM
+    - Use array prototype iterator methods to reformat data and display it on the DOM
+* Use CSS and HTML to match styling and layout of provided comps
 
 [//]: <> (What were the learning goals of this project? What tech did you work with?)
 
 ### Wins + Challenges:
 
+#### Wins:
+- Successfully implemented all required poster generation goals that allow users to create, save, and manage custom motivational content
+- Developed a clean DRY application with reusable code to eliminate any repitition. 
+- Created a seemless user side application where the page does not require you to reload for DOM changes.
 
+#### Challenges:
+- Ensuring event listeners didn't duplicate elements to prevent unintended behaviors
+- Ensuring that the responsive design works across different screen sizes required additional CSS adjustments and testing; a bit funky at times
 
 [//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
 
