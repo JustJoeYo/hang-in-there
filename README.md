@@ -60,6 +60,7 @@ Joe's [![Joe's LinkedIn][linkedin-shield]][linkedin-url]
 #### Challenges:
 - Ensuring event listeners didn't duplicate elements to prevent unintended behaviors
 - Ensuring that the responsive design works across different screen sizes required additional CSS adjustments and testing; a bit funky at times
+- Utilizing the correct methods for certain situations (some versus includes); overcame by determining the efficiency/complexity.
 
 [//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
 
